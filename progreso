@@ -1,0 +1,23 @@
+Se han agregado los algoritmos de ordenamiento Median of 3 Quicksort
+y Dual Pivot Quicksort.
+
+Median of 3 Quick sort no termina en ciertos casos, es posible verlo al 
+correr el archivo test.py. Hay que arreglarlo
+
+Dual pivot Quicksort corrió sin problemas
+
+
+Cosas por hacer:
+
+Agregar los algoritmos de ordenamientos
+- Quicksort with 3-way of partitioning
+- Timsort
+- Introsort
+
+Programa de pruebas:
+Todo
+
+Documentación:
+Median of 3 Quick sort
+Dual Pivot Quicksort
+

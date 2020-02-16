@@ -1,5 +1,7 @@
+import statistics 
+
 # Insertion Sort
-def insertionSort(A:[int]) -> "void":
+def insertionsort(A:[int]) -> "void":
 	"""Recorre el arreglo bucando un valor
 	en el arreglo y posicionandolo en donde debe ir
 	
@@ -16,20 +18,46 @@ def insertionSort(A:[int]) -> "void":
 
 		A[i+1] = key
 
+def insertionsortIndex(A:[int], p:int, f:int) -> "void":
+	"""Version modificada de Insertion Sort la cual solo ordena
+	el subarreglo de A que inicie en la posicion p y termine en
+	la posicion f. Luego, se inserta el subarreglo ordenado en 
+	el arreglo original	
+
+	A: Arreglo a ordenar
+	p: Primer elemento del subarreglo
+	f: Ultimo elemento del subarreglo
+	
+	"""
+	
+	B = A[p:f+1] # Conseguir subarreglo que se debe ordenar
+
+	for j in range(1, len(B)):
+		key = B[j]
+		i = j - 1
+
+		while i >= 0 and B[i] > key:
+			B[i+1] = B[i]
+			i = i - 1
+
+		B[i+1] = key	
+
+	A[p:f+1] = B  # Insertar subarreglo ordenado al arreglo original
+
 # Merge Sort
-def mergeSort(T:[int]) -> "void":
+def mergesort(T:[int]) -> "void":
 	""" Algoritmo que divide un arreglo a la mitad para ordenarlo.
 	En caso de llegar a un subarreglo con pocos elementos, se aplica
 	insertion sort para ordenar ese sub arreglo"""
 
 	if len(T) <= 32:
-		insertionSort(T)
+		insertionsort(T)
 
 	else:
 		U = T[0:len(T)//2]
 		V = T[len(T)//2:len(T)]
-		mergeSort(U)
-		mergeSort(V)
+		mergesort(U)
+		mergesort(V)
 		merge(U, V, T)
 
 def merge(U:[int], V:[int], T:[int]) -> "void":
@@ -55,7 +83,7 @@ def merge(U:[int], V:[int], T:[int]) -> "void":
 			j = j + 1
 
 # Quick Sort Iterativo
-def quickSortIterative(A:[int]) -> "void":
+def quicksortIterative(A:[int]) -> "void":
 	"""Version iterativa del Quick Sort
 	
 	A: Arreglo a ordenar
@@ -95,20 +123,20 @@ def quickSortIterative(A:[int]) -> "void":
 			k = k + 1
 
 # Quick Sort Simple
-def quickSortSimple(A:[int], p:int, r:int) -> "void":
+def quicksortSimple(A:[int], p:int, r:int) -> "void":
 	""" Algoritmo que ordena un arreglo por medio de "pivotes"
 	El ultimo elemento del arreglo a ordenar es usado como pivote"""
 
 	tamanoSecuencia = r - p + 1
 
 	if tamanoSecuencia <= 32 and p < r:	
-		insertionSortIndex(A, p, r)
+		insertionsortIndex(A, p, r)
 
 
 	elif tamanoSecuencia > 32 and p < r:
 		q = partition(A, p, r)	
-		quickSortSimple(A, p, q-1)
-		quickSortSimple(A, q+1, r)
+		quicksortSimple(A, p, q-1)
+		quicksortSimple(A, q+1, r)
 
 	# Para usarse se llama: quickSort(arreglo, 0, len(arreglo) - 1)
 
@@ -131,31 +159,85 @@ def partition(A:[int], p:int, r:int) -> int:
 	A[i+1], A[r] = A[r], A[i+1]
 	return i + 1
 
-def insertionSortIndex(A:[int], p:int, f:int) -> "void":
-	"""Version modificada de Insertion Sort la cual solo ordena
-	el subarreglo de A que inicie en la posicion p y termine en
-	la posicion f. Luego, se inserta el subarreglo ordenado en 
-	el arreglo original
+# Median-of-three Quicksort
+def medianOf3Quicksort(A:[int], f:int, b:int) -> "void":
+	quicksortLoop(A, f, b)
+	insertionsortIndex(A, f, b)
+	# Debe llamarse la primera vez con:
+	# MedianOf3Quicksort(A, 0, len(A))
 
-	Es usado en el algoritmo Quick Sort Simple
+def quicksortLoop(A:[int], f:int, b:int) -> "void":
 
-	A: Arreglo a ordenar
-	p: Primer elemento del subarreglo
-	f: Ultimo elemento del subarreglo
-	
-	"""
-	
-	B = A[p:f+1] # Conseguir subarreglo que se debe ordenar
+	while b - f > 32:
 
-	for j in range(1, len(B)):
-		key = B[j]
-		i = j - 1
+		medianOf3 = statistics.median([A[f], A[f + (b-f)//2], A[b-1]])
+		p = partitionMedianOf3(A, f, b, medianOf3)
 
-		while i >= 0 and B[i] > key:
-			B[i+1] = B[i]
-			i = i - 1
+		if (p - f) >= (b - p):
+			quicksortLoop(A, p, b)
+			b = p
+		else:
+			quicksortLoop(A, f, p)
+			f = p
 
-		B[i+1] = key	
+def partitionMedianOf3(A:[int], p:int, r:int, x:int) -> int:
+	i = p - 1
+	j = r
+	while True:
+		while True:
+			j = j - 1
+			if A[j] <= x:
+				break
+		while True:
+			i = i + 1
+			if A[i] >= x:
+				break			
+		if i < j:
+			A[i], A[j] = A[j], A[i]
+		else:
+			return j
 
-	A[p:f+1] = B  # Insertar subarreglo ordenado al arreglo original
+# Dual Pivot Quicksort
+def dualPivotQuicksort(A:[int], left:int, right:int) -> "void":
 
+	if right - left <= 32:		
+		insertionsortIndex(A, left, right)
+	else:
+		if A[left] > A[right]:
+			p, q = A[right], A[left]
+		else:
+			p, q = A[left], A[right]
+		l, g = left + 1, right - 1
+		k = l
+
+		while k <= g:
+			if A[k] < p:
+				A[k], A[l] = A[l], A[k]
+				l = l + 1
+			else:
+				if A[k] >= q:
+
+					while A[g] > q and k < g:
+						g = g - 1
+
+					if A[g] >= p:
+						A[k], A[g] = A[g], A[k]
+					else:
+						A[k], A[g] = A[g], A[k]
+						A[k], A[l] = A[l], A[k]
+						l = l + 1
+
+					g = g - 1					
+			k = k + 1
+
+		l = l - 1
+		g = g + 1
+		A[left] = A[l]
+		A[l] = p
+		A[right] = A[g]
+		A[g] = q
+		dualPivotQuicksort(A, left, l-1)
+		dualPivotQuicksort(A, l+1, g-1)
+		dualPivotQuicksort(A, g+1, right)
+
+		# Debe llamarse con: dualPivotQuicksort(A, 0, len(A)-1)

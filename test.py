@@ -23,12 +23,15 @@ def generarArreglo(n:int, t:int) -> [int]:
 	
 	return arreglo
 
-n = 33
-t = 2
-arreglo = generarArreglo(n, t)
+# Se generan 100 arreglos de enteros desordenados y se comprueba que el
+# algoritmo usado los ordena
+for i in range(0,100):
+	n = 1000
+	t = 2
+	arreglo = generarArreglo(n, t)		
+	medianOf3Quicksort(arreglo, 0, len(arreglo))
+	
 
-#### print(arreglo)
-quickSortSimple(arreglo, 0, len(arreglo) - 1)
-
-# Comprobar el orden: 
-assert(all(arreglo[i] <= arreglo[i+1] for i in range(0,len(arreglo)-1)))
+	# Comprobar el orden: 
+	assert(all(arreglo[i] <= arreglo[i+1] for i in range(0,len(arreglo)-1)))
+	print(i)
