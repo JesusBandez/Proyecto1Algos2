@@ -28,8 +28,8 @@ def generarArreglo(n:int, t:int) -> [int]:
 for i in range(0,1000):
 	n = 1000
 	t = 2
-	arreglo = generarArreglo(n, t)		
-	quicksortIterative(arreglo)
+	arreglo = generarArreglo(n, t)	
+	introsort(arreglo, 0, len(arreglo))
 	
 
 	# Comprobar el orden: 

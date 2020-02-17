@@ -177,7 +177,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Median-of-3 quicksort
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	#################################medianOf3Quicksort(A, 0, len(A))
+	#################################medianOf3Quicksort(A, 0, len(A))####
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[3].append(tiempoEjecucion)
@@ -185,7 +185,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Introsort
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	################################### Introsort(A) ################
+	introsort(A, 0, len(A))
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[4].append(tiempoEjecucion)
@@ -193,7 +193,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Quicksort with 3-way partitioning
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	################################## quicksortWith3-wayPartitioning(A)
+	################################## quicksortWith3-wayPartitioning(A)##
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[5].append(tiempoEjecucion)

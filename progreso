@@ -1,25 +1,16 @@
-Se ha agregado el programa de pruebas.
+Se ha agregado el algoritmo Introsort
 
-Se ha agregado la librería graficar_puntos.py
-
-El programa de pruebas funciona. Sin embargo, hay que preguntar al profesor
-sobre algunos casos en los tipos de arreglos que se generan. Los cuales
-hacen que el programa falle. De igual forma, hay que someter a más pruebas
-al programa
-
-Para mas detalles, ver los comentarios en la funcion generarArreglo()
-
-Cabe destacar que los algoritmos que faltan y median of 3 quicksort están
-deshabilitados dentro del programa de pruebas a pesar de mostrar un
-resultado en la salida del programa
-
+Parece tener problemas con los arreglos de numeros reales entre 0 y 1
+(Arreglos tipo 1)
 
 Cosas por hacer:
 
 Agregar los algoritmos de ordenamientos:
 - Quicksort with 3-way of partitioning
 - Timsort
-- Introsort
+
+Someter a pruebas a Intro sort
+
 
 Corregir:
 - Median of 3 Quicksort
@@ -35,4 +26,8 @@ Dual Pivot Quicksort
 
 Preguntas extra:
 Cambiamos el nombre de las variables para hacerlas más descriptivas?
+
+Recordar:
+Es necesario agregar Precondicion y Postcondicion a TODOS los procedimientos
+
 
