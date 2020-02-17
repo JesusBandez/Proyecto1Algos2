@@ -1,23 +1,38 @@
-Se han agregado los algoritmos de ordenamiento Median of 3 Quicksort
-y Dual Pivot Quicksort.
+Se ha agregado el programa de pruebas.
 
-Median of 3 Quick sort no termina en ciertos casos, es posible verlo al 
-correr el archivo test.py. Hay que arreglarlo
+Se ha agregado la librería graficar_puntos.py
 
-Dual pivot Quicksort corrió sin problemas
+El programa de pruebas funciona. Sin embargo, hay que preguntar al profesor
+sobre algunos casos en los tipos de arreglos que se generan. Los cuales
+hacen que el programa falle. De igual forma, hay que someter a más pruebas
+al programa
+
+Para mas detalles, ver los comentarios en la funcion generarArreglo()
+
+Cabe destacar que los algoritmos que faltan y median of 3 quicksort están
+deshabilitados dentro del programa de pruebas a pesar de mostrar un
+resultado en la salida del programa
 
 
 Cosas por hacer:
 
-Agregar los algoritmos de ordenamientos
+Agregar los algoritmos de ordenamientos:
 - Quicksort with 3-way of partitioning
 - Timsort
 - Introsort
 
-Programa de pruebas:
-Todo
+Corregir:
+- Median of 3 Quicksort
 
-Documentación:
+
+Programa de pruebas:
+Resolver las dudas sobre la generacion de los arreglos de prueba
+Comprobar la funcionalidad del programa
+
+Funciones por documentar:
 Median of 3 Quick sort
 Dual Pivot Quicksort
+
+Preguntas extra:
+Cambiamos el nombre de las variables para hacerlas más descriptivas?
 

@@ -25,11 +25,11 @@ def generarArreglo(n:int, t:int) -> [int]:
 
 # Se generan 100 arreglos de enteros desordenados y se comprueba que el
 # algoritmo usado los ordena
-for i in range(0,100):
+for i in range(0,1000):
 	n = 1000
 	t = 2
 	arreglo = generarArreglo(n, t)		
-	medianOf3Quicksort(arreglo, 0, len(arreglo))
+	quicksortIterative(arreglo)
 	
 
 	# Comprobar el orden: 

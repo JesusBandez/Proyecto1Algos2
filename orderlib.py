@@ -93,8 +93,8 @@ def quicksortIterative(A:[int]) -> "void":
 	n, m = 0, 1
 	while m < N:
 		n,m = n + 1, m * 2
-	x = [0 for i in range(0,n)]
-	y = [0 for i in range(0,n)]
+	x = [0] * n
+	y = [0] * n
 	k, p, q = 0, 0, N
 	while k != 0 or q-p >= 2:
 		if q - p <= 1:
