@@ -1,33 +1,19 @@
-Se ha agregado el algoritmo Introsort
+Se han agregado los algoritmos timsort y 3 way partitioning
 
-Parece tener problemas con los arreglos de numeros reales entre 0 y 1
-(Arreglos tipo 1)
+Se han arreglado los algoritmos Introsort y Median of three Quicksort
 
 Cosas por hacer:
 
-Agregar los algoritmos de ordenamientos:
-- Quicksort with 3-way of partitioning
-- Timsort
-
-Someter a pruebas a Intro sort
-
-
-Corregir:
-- Median of 3 Quicksort
-
-
 Programa de pruebas:
-Resolver las dudas sobre la generacion de los arreglos de prueba
+Aplicar los cambios a la generacion de arreglos en la funcion generarArreglo
 Comprobar la funcionalidad del programa
 
 Funciones por documentar:
 Median of 3 Quick sort
-Dual Pivot Quicksort
 
 Preguntas extra:
 Cambiamos el nombre de las variables para hacerlas más descriptivas?
 
-Recordar:
-Es necesario agregar Precondicion y Postcondicion a TODOS los procedimientos
+Agregar Precondicion y Postcondicion a todos los procedimientos
 
 

@@ -177,7 +177,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Median-of-3 quicksort
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	#################################medianOf3Quicksort(A, 0, len(A))####
+	medianOf3Quicksort(A, 0, len(A))
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[3].append(tiempoEjecucion)
@@ -193,7 +193,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Quicksort with 3-way partitioning
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	################################## quicksortWith3-wayPartitioning(A)##
+	quicksortWith3WayPartitioning(A, 0, len(A) - 1)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[5].append(tiempoEjecucion)
@@ -209,7 +209,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	# Medida de tiempo para Timsort
 	A = copiaArregloPrueba[:]
 	tiempoInicial = time()
-	###################################### Timsort() #############
+	timsort(A)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
 	C[7].append(tiempoEjecucion)
@@ -288,7 +288,7 @@ def dibujarGrafica(secuencia:[int], tiempos:[[int]],
 			gp.dibujar_grafica(secuencia, tiempoAlgo, nombres[i])
 			i = i + 1	
 
-		gp.mostrar_grafico("Tiempo (seg)", "Número de elementos")
+		gp.mostrar_grafico("Número de elementos", "Tiempo (seg)")
 
 # Lee los argumentos del programa
 argumentos = leerArgumentos()
