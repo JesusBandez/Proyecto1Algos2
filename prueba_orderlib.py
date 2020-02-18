@@ -15,7 +15,7 @@ def leerArgumentos() -> "void":
 	# Permite introducir los argumentos
 	argumentos = argparse.ArgumentParser()
 	argumentos.add_argument("secuencia", help = "Cantidad de elementos",
-		type = int, nargs="*", default = [1000])
+		type = int, nargs="*")
 	argumentos.add_argument("-i", help = "Numero de intentos de cada prueba",
 		type = int, default = 3)
 	argumentos.add_argument("-t", help = "Tipo de prueba que se realizara", 
@@ -37,11 +37,17 @@ def comprobarArgumentos(A:[int],
 	g: El programa muestra una grafica con los resultados
 	"""
 
+	try:
+		assert(A != [])
+	except:
+		print("Debe ingresar al menos una secuencia con un elemento")
+		exit()
+
 	try: 
-		assert(all(A[i] >= 0 for i in range(0,len(A))))			
+		assert(all(A[i] > 0 for i in range(0,len(A))))			
 	except:
 		print("\nLos argumentos ingresados no son validos:")
-		print("La secuencia solo debe tener elementos mayores o iguales que 0")		
+		print("La secuencia solo debe tener elementos mayores que 0")		
 		exit()
 
 	try:
@@ -49,12 +55,14 @@ def comprobarArgumentos(A:[int],
 	except:
 		print("\nLos argumentos ingresados no son validos:")
 		print("El argumento i debe ser mayor que 0")
+		exit()
 
 	try:
 		assert(1 <= t <= 7)
 	except:
 		print("\nLos argumentos ingresados no son validos:")
 		print("El argumento t debe estar entre 1 y 7, incluyendo los extremos")
+		exit()
 
 	try:
 		assert(g == False or len(A) != 1)
@@ -85,13 +93,11 @@ def generarArreglo(n:int, t:int) -> [int]: # MODIFICAR!!!!!!!!!!!!!!!!!!
 	if t == 1: # Numeros reales entre 0 y 1, sin incluir 1
 		arreglo = [uniform(0,1) for i in range(0,n)]
 
-	elif t == 2 or t == 6 or t == 7: # Numeros enteros ordenados de forma ascendente
-		############# ES POSIBLE QUE ESTO NO SEA CORRECTO 
+	elif t == 2 or t == 6 or t == 7: # Numeros enteros ordenados de forma ascendente		
 		arreglo = [randint(0,n) for i in range(0,n)]
 		arreglo.sort()
 
-	elif t == 3: # Numeros enteros ordenados de forma descendente
-		############# ES POSIBLE QUE ESTO NO SEA CORRECTO
+	elif t == 3: # Numeros enteros ordenados de forma descendente		
 		arreglo = [randint(0,n) for i in range(0,n)]
 		arreglo.sort(reverse=True)
 
@@ -99,11 +105,7 @@ def generarArreglo(n:int, t:int) -> [int]: # MODIFICAR!!!!!!!!!!!!!!!!!!
 		arreglo = [randint(0,1) for i in range(0,n)]
 
 	elif t == 5:
-		# Secuencia de la forma:
-		# [1, 2, ... , n/2, n/2, ..., 2, 1]
-		# Es esa division la division entera???
-		##############
-
+		# Secuencia de la forma: [1, 2, ... , n/2, n/2, ..., 2, 1]
 		arreglo = []
 		k = 1
 
@@ -117,31 +119,32 @@ def generarArreglo(n:int, t:int) -> [int]: # MODIFICAR!!!!!!!!!!!!!!!!!!
 			k = k - 1
 
 	if t == 6:
-		# Realmente puedo usar como arreglo base el arreglo tipo 2?
-		# Por la forma en la que lo describe, es OBLIGATORIO que 
-		# n > 8
-
-		i = 0
-		while i < 16:
-			q = randint(0, len(arreglo)- 9)
-			p = q + 8
-			arreglo[q], arreglo[p] = arreglo[p], arreglo[q]
-			i = i + 1
+		# Arreglo de enteros ordenados al que se le intercambian
+		# dos elementos separados por otros 8 elementos 16 veces
+		if n > 8:
+			# Solo es posible si la secuencia tiene mas de 8 elementos
+			i = 0
+			while i < 16:
+				q = randint(0, len(arreglo)- 9)
+				p = q + 8
+				arreglo[q], arreglo[p] = arreglo[p], arreglo[q]
+				i = i + 1
 
 	elif t == 7:
-		# Mismas preguntas que la tipo 6 pero con n > 4
-		# n / 4 es la division entera?
-
-		i = 0
-		while i <= n // 4:
-			q = randint(0, len(arreglo)- 5)
-			p = q + 4
-			arreglo[q], arreglo[p] = arreglo[p], arreglo[q]
-			i = i + 1
+		# Arreglo de enteros ordenados al que se le intercambian
+		# dos elementos separados por otros 4 elementos n/4 veces
+		if n > 4:
+			# Solo es posible si la secuencia tiene mas de 4 elementos
+			i = 0
+			while i <= n // 4:
+				q = randint(0, len(arreglo)- 5)
+				p = q + 4
+				arreglo[q], arreglo[p] = arreglo[p], arreglo[q]
+				i = i + 1
 
 	return arreglo
 
-def obtenerTiempos(A:[int], C:[[int]]) -> "void":
+def obtenerTiempos(A:list, C:[[float]]) -> "void":
 	""" Procedimiento para medir el tiempo de ejecucion de los algoritmos	
 
 	A: arreglo que los algoritmos deben ordenar
@@ -156,6 +159,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	mergesort(A)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[0].append(tiempoEjecucion)
 
 	# Medida de tiempo para Quicksort iterativo
@@ -164,6 +168,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	quicksortIterative(A)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[1].append(tiempoEjecucion)
 
 	# Medida de tiempo para Quicksort simple
@@ -172,6 +177,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	quicksortSimple(A, 0, len(A) - 1)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[2].append(tiempoEjecucion)
 
 	# Medida de tiempo para Median-of-3 quicksort
@@ -180,6 +186,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	medianOf3Quicksort(A, 0, len(A))
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[3].append(tiempoEjecucion)
 
 	# Medida de tiempo para Introsort
@@ -188,6 +195,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	introsort(A, 0, len(A))
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[4].append(tiempoEjecucion)
 
 	# Medida de tiempo para Quicksort with 3-way partitioning
@@ -196,6 +204,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	quicksortWith3WayPartitioning(A, 0, len(A) - 1)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[5].append(tiempoEjecucion)
 
 	# Medida de tiempo para Dual pivot Quicksort
@@ -204,6 +213,7 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	dualPivotQuicksort(A, 0, len(A) - 1)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[6].append(tiempoEjecucion)
 
 	# Medida de tiempo para Timsort
@@ -212,9 +222,18 @@ def obtenerTiempos(A:[int], C:[[int]]) -> "void":
 	timsort(A)
 	tiempoFinal = time()
 	tiempoEjecucion = tiempoFinal - tiempoInicial
+	comprobarOrden(A)
 	C[7].append(tiempoEjecucion)
 
-def promedios(A:[[int]], B:[int]) -> "void":
+def comprobarOrden(A:list) -> "void":
+	""" Procedimiento para comprobar que el arreglo que se pasa
+	como argumento esta ordenado
+
+	A: Arreglo ordenado
+	"""
+	assert(all(A[i] <= A[i+1] for i in range(0,len(A)-1)))
+
+def promedios(A:[[float]], B:[float]) -> "void":
 	""" Procedimiento para calcular el promedio de los arreglos dentro del
 	arreglo A
 
@@ -228,7 +247,7 @@ def promedios(A:[[int]], B:[int]) -> "void":
 		B[j] = statistics.mean(arreglo)
 		j = j + 1
 
-def desviacionesEstandar(A:[[int]], B:[int]) -> "void":
+def desviacionesEstandar(A:[[float]], B:[float]) -> "void":
 	""" Procedimiento para calcular las desviaciones de los arreglos dentro
 	del arreglo A
 
@@ -242,7 +261,7 @@ def desviacionesEstandar(A:[[int]], B:[int]) -> "void":
 		B[j] = statistics.stdev(arreglo)
 		j = j + 1
 
-def redondear(A:[int]) -> "void":
+def redondear(A:[float]) -> "void":
 	""" Procedimiento que redondea a dos decimales todos los elementos dentro
 	del arreglo A
 	
@@ -252,7 +271,7 @@ def redondear(A:[int]) -> "void":
 	for i in range(0,len(A)):
 		A[i] = round(A[i], 2)
 
-def imprimirValoresFinales(A:[int], B:[int], 
+def imprimirValoresFinales(A:[float], B:[float], 
 	C:[str], n:int) -> "void":
 	""" Imprime los valores de los arreglos A, B y C bajo una plantilla
 
@@ -334,7 +353,11 @@ for n in secuencia:
 
 	# Calcular promedios y desviaciones
 	promedios(tiempos, tiemposPromedio)
-	desviacionesEstandar(tiempos, desviaciones)
+
+	if i > 1:
+		# Solo se calculan las desviaciones si se hicieron mas de
+		# un intento o pruebas sobre cada algoritmo
+		desviacionesEstandar(tiempos, desviaciones)
 
 	# Redondear a dos decimales los promedios y las desviaciones
 	redondear(tiemposPromedio)
