@@ -90,35 +90,47 @@ def quicksortIterative(A:list) -> "void":
 
 	N = len(A)
 	n, m = 0, 1
+
 	while m < N:
 		n,m = n + 1, m * 2
+
 	x = [0] * n
 	y = [0] * n
 	k, p, q = 0, 0, N
 	while k != 0 or q-p >= 2:
+
 		if q - p <= 1:
 			k = k - 1
 			p, q = x[k], y[k]
+
 		elif q - p >= 2:
 			z = A[(p+q)//2]
 			r, w, b = p, p, q
+
 			while w != b:
-				if A[w] < z:
+
+				if A[w] < z:					
 					A[r], A[w] = A[w], A[r]
 					r, w = r + 1, w + 1
+
 				elif A[w] == z:
 					w = w + 1
+
 				elif A[w] > z:
 					b = b - 1
 					A[b], A[w] = A[w], A[b]
+
 			if r-p <= q - w:
+
 				x[k] = w
 				y[k] = q
 				q = r
+
 			elif q - w <= r - p:
 				x[k] = p
 				y[k] = r
 				p = w
+				
 			k = k + 1
 
 # Quick Sort Simple
@@ -174,6 +186,13 @@ def medianOf3Quicksort(A:list, f:int, b:int) -> "void":
 	# MedianOf3Quicksort(A, 0, len(A))
 
 def quicksortLoop(A:list, f:int, b:int) -> "void":
+	""" Procedimiento de Media of 3 Quicksort que retorna el arreglo
+	ordenado desde el indice f hasta el indice b sin incluir
+
+	A: Arreglo a ordenar
+	f: Primera posicion del arreglo
+	b: Primera posicion mas alla de la ultima posicion del arreglo
+	"""
 
 	while (b-f > 32):
 
@@ -188,6 +207,18 @@ def quicksortLoop(A:list, f:int, b:int) -> "void":
 			f = p + 1
 
 def partitionMedianOf3(A:list, p:int, r:int, x:int) -> int:
+	""" Procedimiento partition propuesto por Hoare para el 
+	algoritmo Quicksort. 
+
+	A: Arreglo a ordenar
+	p: Primera posicion del arreglo
+	r: Primera posicion mas alla de la ultima posicion del arreglo
+	x: Media de tres elementos posicionados en el arreglo tales que
+		esos elementos estan en la primera posicion, en la ultima 
+		posicion y en la mitad del arreglo.
+
+	"""
+
 	i = p - 1
 	j = r
 	while True:
