@@ -6,12 +6,17 @@ from orderlib import *
 from random import randint, uniform
 from time import time # Usada para calcular el tiempo de ejecucion
 
+
 sys.setrecursionlimit(10000000) # Aumenta la profundidad maxima de las recursiones
 
 
 def leerArgumentos() -> "void":
 	""" Procedimiento que permite ingresar los argumentos al programa
 	"""
+
+	# Precondicion
+	assert(True)
+
 	# Permite introducir los argumentos
 	argumentos = argparse.ArgumentParser()
 	argumentos.add_argument("secuencia", help = "Cantidad de elementos",
@@ -24,6 +29,9 @@ def leerArgumentos() -> "void":
 		action="store_const", default=False, const=True)
 	
 	argumentos = argumentos.parse_args()
+
+	# Postcondicion
+	assert(True)
 	
 	return argumentos
 
@@ -75,20 +83,29 @@ def nombrarAlgoritmos() -> [str]:
 	dentro de un arreglo	
 	"""
 
+	# Precondicion
+	assert(True)
+
 	nombresAlgoritmos = ["Mergesort", "Quicksort iterativo",
 		"Quicksort simple", "Median-of-3 quicksort", "Introsort", 
 		"Quicksort with 3-way partitioning", "Dual pivot Quicksort",
 		"Timsort"]
 
+	#Postcondicion
+	assert(nombresAlgoritmos != [])
+
 	return nombresAlgoritmos
 
-def generarArreglo(n:int, t:int) -> [int]: # MODIFICAR!!!!!!!!!!!!!!!!!!
+def generarArreglo(n:int, t:int) -> list:
 	""" Genera un arreglo de tamaño n, este arreglo tiene elementos
 	y ordenes distintos que dependen del parametro t
 	
 	n: Numero de elementos con los que se genera el arreglo
 	t: Parametro que modifica los elementos del arreglo y su orden
 	"""
+
+	# Precondicion
+	assert(n > 0 and 1 <= t <= 7)
 
 	if t == 1: # Numeros reales entre 0 y 1, sin incluir 1
 		arreglo = [uniform(0,1) for i in range(0,n)]
@@ -142,6 +159,17 @@ def generarArreglo(n:int, t:int) -> [int]: # MODIFICAR!!!!!!!!!!!!!!!!!!
 				arreglo[q], arreglo[p] = arreglo[p], arreglo[q]
 				i = i + 1
 
+	# Postcondicion
+	assert( (t != 1 or all(0 <= arreglo[i] < 1 for i in range(0, len(arreglo))))
+		or (t != 2 or all(arreglo[i] <= arreglo[i + 1] for i in range(0, len(arreglo)-1)))
+		or (t != 3 or all(arreglo[i] >= arreglo[i + 1] for i in range(0, len(arreglo)-1)))
+		or (t != 4 or all((arreglo[i] == 0 or arreglo[i] == 1) for i in range(0, len(arreglo))))
+		or (t != 5 or all(arreglo[i] <= arreglo[i + 1] for i in range(0, len(arreglo)-1)) or
+			any(arreglo[i] > arreglo[i + 1] for i in range(0, len(arreglo)-1)))
+		or (t != 6 or all(arreglo[i] <= arreglo[i + 1] for i in range(0, len(arreglo)-1)) or
+			any(arreglo[i] > arreglo[i + 1] for i in range(0, len(arreglo)-1)))		)
+
+
 	return arreglo
 
 def obtenerTiempos(A:list, C:[[float]]) -> "void":
@@ -150,6 +178,10 @@ def obtenerTiempos(A:list, C:[[float]]) -> "void":
 	A: arreglo que los algoritmos deben ordenar
 	C: arreglo para guardar los tiempos de cada algoritmo	
 	"""
+
+	# Precondicion
+	assert( A != [] and all(all(C[i][j]>=0 for j in range(0, len(C[i]))) 
+		for i in range(0, 8)))
 
 	# Crear copia del arreglo prueba
 	copiaArregloPrueba = A[:]
@@ -225,6 +257,9 @@ def obtenerTiempos(A:list, C:[[float]]) -> "void":
 	comprobarOrden(A)
 	C[7].append(tiempoEjecucion)
 
+	# Postcondicion
+	assert(all(all(C[i][j]>=0 for j in range(0, len(C[i]))) for i in range(0, 8)))
+
 def comprobarOrden(A:list) -> "void":
 	""" Procedimiento para comprobar que el arreglo que se pasa
 	como argumento esta ordenado
@@ -242,10 +277,17 @@ def promedios(A:[[float]], B:[float]) -> "void":
 	B: Arreglo que guarda los promedios
 	"""
 
+	# Precondicion
+	assert(all(A[i] != [] for i in range(0, 8)) and 
+		all(B[i] == 0 for i in range(0, 8)))
+
 	j = 0
 	for arreglo in A:
 		B[j] = statistics.mean(arreglo)
 		j = j + 1
+
+	# Postcondicion
+	assert(all(B[i] == statistics.mean(A[i]) for i in range(0, 8)))
 
 def desviacionesEstandar(A:[[float]], B:[float]) -> "void":
 	""" Procedimiento para calcular las desviaciones de los arreglos dentro
@@ -256,10 +298,17 @@ def desviacionesEstandar(A:[[float]], B:[float]) -> "void":
 	B: Arreglo que guarda las desviaciones estandar	
 	"""
 
+	# Precondicion
+	assert(all(A[i] != [] for i in range(0, 8)) and 
+		all(B[i] == 0 for i in range(0, 8)))
+
 	j = 0
 	for arreglo in A:
 		B[j] = statistics.stdev(arreglo)
 		j = j + 1
+
+	# Postcondicion
+	assert(all(B[i] == statistics.stdev(A[i]) for i in range(0, 8)))
 
 def redondear(A:[float]) -> "void":
 	""" Procedimiento que redondea a dos decimales todos los elementos dentro
@@ -268,8 +317,14 @@ def redondear(A:[float]) -> "void":
 	A: Arreglo de numeros reales que se redondearan a dos decimales
 	"""
 
+	# Precondicion
+	assert(all(A[i]>= 0 for i in range(0, 8)))
+
 	for i in range(0,len(A)):
 		A[i] = round(A[i], 2)
+
+	# Postcondicion
+	assert(all(A[i]>= 0 for i in range(0, 8)))
 
 def imprimirValoresFinales(A:[float], B:[float], 
 	C:[str], n:int) -> "void":
@@ -281,11 +336,21 @@ def imprimirValoresFinales(A:[float], B:[float],
 	n: Cantidad de elementos que contenia el arreglo ordenado
 	"""
 
+	# Precondicion
+	assert(all(A[i] >= 0 for i in range(0, 8)) 
+		and all(B[i] >= 0 for i in range(0, 8))
+		and C != [] and n > 0)
+
 	print("\n\nArreglo de: " + str(n) + " elementos", end="")
 
 	for i in range(0, len(A)):
 		print("\nTiempo promedio de " + C[i] + " " + str(A[i]) + " sg, " 
 			+ str(B[i]) + " std")
+
+	# Postcondicion
+	assert(all(A[i] >= 0 for i in range(0, 8)) 
+		and all(B[i] >= 0 for i in range(0, 8))
+		and C != [] and n > 0)
 
 def dibujarGrafica(secuencia:[int], tiempos:[[int]], 
 	nombres:[str]) -> "void":
@@ -299,6 +364,10 @@ def dibujarGrafica(secuencia:[int], tiempos:[[int]],
 	nombres: Arreglo con los nombres de los algoritmos
 	"""
 
+	# Precondicion
+	assert(all(secuencia[i] > 0 for i in range(0, len(secuencia)))	
+		and nombres != [])
+
 	if __name__ == '__main__':		
 		
 		i = 0
@@ -308,6 +377,10 @@ def dibujarGrafica(secuencia:[int], tiempos:[[int]],
 			i = i + 1	
 
 		gp.mostrar_grafico("Número de elementos", "Tiempo (seg)")
+
+	# Postcondicion
+	assert(all(secuencia[i] > 0 for i in range(0, len(secuencia)))
+		and nombres != [])
 
 # Lee los argumentos del programa
 argumentos = leerArgumentos()

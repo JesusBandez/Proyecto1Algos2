@@ -1,32 +1,14 @@
-Se han resuelto los casos "dudas" sobre la funcion generarArreglo
+Se han agregado las precondiciones y postcondiciones a los procedimientos
 
-Ahora la desviacion estandar solo se calcula si se ejecutan mas de 
-dos intentos de prueba sobre cada algoritmo
+Se han guardado los datos de las pruebas
 
-Algunos tipos de prueba de arreglos no se ejecutan si la cantidad de
-elementos que tiene el arreglo es muy pequeña
-
-Ahora el programa aborta si no se ingresa una secuencia de entrada. Antes se
-tomaba el valor "1000" por defecto
-
-Se ha agregado el procedimiento "comprobarArreglo". Este
-procedimiento comprueba que el arreglo que se pasa como argumento
-esta ordenado. Este funciona como postcondicion para los algoritmos de
-ordenamiento
+Se ha eliminado el archivo test.py
 
 Cosas por hacer:
 
 Informe de proyecto
 
-Programa de pruebas:
-Comprobar la funcionalidad del programa
-
 Funciones por documentar:
 Median of 3 Quick sort
-
-Preguntas extra:
-Cambiamos el nombre de las variables para hacerlas más descriptivas?
-
-Agregar Precondicion y Postcondicion a todos los procedimientos
 
 

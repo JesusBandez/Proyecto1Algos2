@@ -1,0 +1,91 @@
+python prueba_orderlib.py -t 5 -i 3 -g 4096 8192 16384 32768 65536
+
+
+Arreglo de: 4096 elementos
+Tiempo promedio de Mergesort 0.01 sg, 0.0 std
+
+Tiempo promedio de Quicksort iterativo 1.0 sg, 0.0 std
+
+Tiempo promedio de Quicksort simple 0.3 sg, 0.0 std
+
+Tiempo promedio de Median-of-3 quicksort 0.02 sg, 0.0 std
+
+Tiempo promedio de Introsort 0.04 sg, 0.0 std
+
+Tiempo promedio de Quicksort with 3-way partitioning 0.03 sg, 0.0 std
+
+Tiempo promedio de Dual pivot Quicksort 0.02 sg, 0.0 std
+
+Tiempo promedio de Timsort 0.01 sg, 0.0 std
+
+
+Arreglo de: 8192 elementos
+Tiempo promedio de Mergesort 0.02 sg, 0.0 std
+
+Tiempo promedio de Quicksort iterativo 4.13 sg, 0.13 std
+
+Tiempo promedio de Quicksort simple 1.19 sg, 0.01 std
+
+Tiempo promedio de Median-of-3 quicksort 0.05 sg, 0.0 std
+
+Tiempo promedio de Introsort 0.08 sg, 0.0 std
+
+Tiempo promedio de Quicksort with 3-way partitioning 0.07 sg, 0.0 std
+
+Tiempo promedio de Dual pivot Quicksort 0.05 sg, 0.0 std
+
+Tiempo promedio de Timsort 0.03 sg, 0.0 std
+
+
+Arreglo de: 16384 elementos
+Tiempo promedio de Mergesort 0.05 sg, 0.0 std
+
+Tiempo promedio de Quicksort iterativo 16.6 sg, 0.87 std
+
+Tiempo promedio de Quicksort simple 4.71 sg, 0.04 std
+
+Tiempo promedio de Median-of-3 quicksort 0.1 sg, 0.0 std
+
+Tiempo promedio de Introsort 0.18 sg, 0.0 std
+
+Tiempo promedio de Quicksort with 3-way partitioning 0.15 sg, 0.0 std
+
+Tiempo promedio de Dual pivot Quicksort 0.11 sg, 0.0 std
+
+Tiempo promedio de Timsort 0.06 sg, 0.0 std
+
+
+Arreglo de: 32768 elementos
+Tiempo promedio de Mergesort 0.11 sg, 0.01 std
+
+Tiempo promedio de Quicksort iterativo 68.0 sg, 2.94 std
+
+Tiempo promedio de Quicksort simple 19.4 sg, 0.49 std
+
+Tiempo promedio de Median-of-3 quicksort 0.26 sg, 0.01 std
+
+Tiempo promedio de Introsort 0.39 sg, 0.02 std
+
+Tiempo promedio de Quicksort with 3-way partitioning 0.34 sg, 0.02 std
+
+Tiempo promedio de Dual pivot Quicksort 0.27 sg, 0.01 std
+
+Tiempo promedio de Timsort 0.13 sg, 0.0 std
+
+
+Arreglo de: 65536 elementos
+Tiempo promedio de Mergesort 0.25 sg, 0.0 std
+
+Tiempo promedio de Quicksort iterativo 282.71 sg, 6.53 std
+
+Tiempo promedio de Quicksort simple 79.24 sg, 1.76 std
+
+Tiempo promedio de Median-of-3 quicksort 0.6 sg, 0.05 std
+
+Tiempo promedio de Introsort 0.87 sg, 0.06 std
+
+Tiempo promedio de Quicksort with 3-way partitioning 0.72 sg, 0.02 std
+
+Tiempo promedio de Dual pivot Quicksort 0.61 sg, 0.02 std
+
+Tiempo promedio de Timsort 0.27 sg, 0.01 std
